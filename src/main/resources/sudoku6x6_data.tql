@@ -1,0 +1,8 @@
+insert
+$v1 = 1 isa number;
+$v2 = 2 isa number;
+$v3 = 3 isa number;
+$v4 = 4 isa number;
+$v5 = 5 isa number;
+$v6 = 6 isa number;
+
