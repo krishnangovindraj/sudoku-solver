@@ -90,9 +90,14 @@ public class SudokuMain {
                 try (TypeDBTransaction tx = session.transaction(TypeDBTransaction.Type.READ, TypeDBOptions.core().infer(true))) {
                     int[][] sudoku = readSudoku(sudokuFilePath);
                     SudokuSolver solver = new SudokuSolver();
+
+                    long start = System.currentTimeMillis();
                     SudokuSolver.Solution solution = solver.solve(tx, sudoku);
+                    long stop = System.currentTimeMillis();
+
                     if (solution != null) solution.print();
                     else System.out.println("No solution found!");
+                    System.out.println("Solving took: " + (stop-start) + " ms");
                 }
             }
         }
