@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-workspace(name = "vaticle_typedb_benchmark")
+workspace(name = "vaticle_sudoku_solver")
 
 #################################
 ## Load @vaticle_dependencies #
