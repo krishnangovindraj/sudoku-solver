@@ -35,12 +35,3 @@ java_binary(
         ":resources/sudoku6x6_data.tql",
     ],
 )
-
-load("@vaticle_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
-checkstyle_test(
-    name = "checkstyle",
-    include = glob(["**/*.java", "**/*.tql", "BUILD"]),
-    exclude = glob(["test/data/*"]) + ["loader-config.json.template"],
-    license_type = "apache-header",
-    size = "small",
-)

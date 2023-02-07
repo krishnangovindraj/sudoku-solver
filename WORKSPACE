@@ -32,10 +32,6 @@ bazel_toolchain()
 load("@vaticle_dependencies//builder/java:deps.bzl", java_deps = "deps")
 java_deps()
 
-# Load maven
-#load("//:dependencies/maven/artifacts.bzl", vaticle_sudoku_solver_artifacts = "artifacts")
-
-# Load neo4j
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
