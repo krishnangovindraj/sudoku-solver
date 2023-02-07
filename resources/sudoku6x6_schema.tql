@@ -21,6 +21,9 @@
 
 define
 
+# A temporary hack for the reasoner planner to consider all given values in a single retrievable.
+connector-hack sub attribute, value long;
+
 number sub attribute, value long,
     plays row:pos1, plays row:pos2, plays row:pos3, plays row:pos4, plays row:pos5, plays row:pos6,
     plays column:pos1, plays column:pos2, plays column:pos3, plays column:pos4, plays column:pos5, plays column:pos6,

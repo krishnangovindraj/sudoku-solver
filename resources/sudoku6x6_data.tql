@@ -20,6 +20,7 @@
 #
 
 insert
+$connector-hack = -1 isa connector-hack;
 $v1 = 1 isa number;
 $v2 = 2 isa number;
 $v3 = 3 isa number;

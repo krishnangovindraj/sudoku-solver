@@ -65,7 +65,8 @@ class SudokuSolver {
 
         ThingVariable.Relation solutionRelation = null;
         int size = initial.length;
-        UnboundVariable prevRp = null;
+        UnboundVariable connectorHack = TypeQL.var("connector-hack");
+        statements.add(connectorHack.isa("connector-hack"));
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 String role = "pos" + (i+1) + (j+1);
@@ -76,8 +77,7 @@ class SudokuSolver {
                 if (val != 0 ) {
                     statements.add(rp.eq(val));
                     // TODO: Remove: Hack for reasoner-planner to combine all equalities into a single retrievable
-                    if (prevRp != null) statements.add(prevRp.neq(rp));
-                    prevRp = rp;
+                    statements.add(connectorHack.neq(rp));
                 }
             }
         }
@@ -93,6 +93,7 @@ class SudokuSolver {
         Concept solutionRelation = tx.query().match(TypeQL.match(sudokuPattern).limit(1))
                 .map(ans -> ans.get("r"))
                 .findFirst().orElse(null);
+        if (solutionRelation == null) return null;
         return new Solution(solutionRelation.asRelation().asRemote(tx));
     }
 

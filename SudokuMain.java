@@ -91,7 +91,8 @@ public class SudokuMain {
                     int[][] sudoku = readSudoku(sudokuFilePath);
                     SudokuSolver solver = new SudokuSolver();
                     SudokuSolver.Solution solution = solver.solve(tx, sudoku);
-                    solution.print();
+                    if (solution != null) solution.print();
+                    else System.out.println("No solution found!");
                 }
             }
         }
