@@ -23,8 +23,11 @@ define
 
 # A temporary hack for the reasoner planner to consider all given values in a single retrievable.
 connector-hack sub attribute, value long;
+permutation-generator sub relation, relates mem;
 
 number sub attribute, value long,
+    plays permutation-generator:mem,
+    plays box:pos1, plays box:pos2, plays box:pos3, plays box:pos4, plays box:pos5, plays box:pos6,
     plays row:pos1, plays row:pos2, plays row:pos3, plays row:pos4, plays row:pos5, plays row:pos6,
     plays column:pos1, plays column:pos2, plays column:pos3, plays column:pos4, plays column:pos5, plays column:pos6,
     plays solution:pos11, plays solution:pos12, plays solution:pos13, plays solution:pos14, plays solution:pos15, plays solution:pos16,
@@ -39,6 +42,10 @@ row sub relation,
 
 column sub relation,
     relates pos1, relates pos2, relates pos3, relates pos4, relates pos5, relates pos6;
+
+box sub relation,
+    relates pos1, relates pos2, relates pos3, relates pos4, relates pos5, relates pos6;
+
 solution sub relation,
     relates pos11, relates pos12, relates pos13, relates pos14, relates pos15, relates pos16,
     relates pos21, relates pos22, relates pos23, relates pos24, relates pos25, relates pos26,
@@ -49,64 +56,23 @@ solution sub relation,
 
 rule row-rule:
 when {
-    $v1 isa number;
-    $v2 isa number;
-    $v3 isa number;
-    $v4 isa number;
-    $v5 isa number;
-    $v6 isa number;
-    $v1 != $v2;
-    $v1 != $v3;
-    $v1 != $v4;
-    $v1 != $v5;
-    $v1 != $v6;
-
-    $v2 != $v3;
-    $v2 != $v4;
-    $v2 != $v5;
-    $v2 != $v6;
-
-    $v3 != $v4;
-    $v3 != $v5;
-    $v3 != $v6;
-
-    $v4 != $v5;
-    $v4 != $v6;
-
-    $v5 != $v6;
+    (mem: $v1, mem: $v2, mem: $v3, mem: $v4, mem: $v5, mem: $v6) isa permutation-generator;
 } then {
    (pos1: $v1, pos2: $v2, pos3: $v3, pos4: $v4, pos5: $v5, pos6: $v6) isa row;
 };
 
 rule column-rule:
 when {
-    $v1 isa number;
-    $v2 isa number;
-    $v3 isa number;
-    $v4 isa number;
-    $v5 isa number;
-    $v6 isa number;
-    $v1 != $v2;
-    $v1 != $v3;
-    $v1 != $v4;
-    $v1 != $v5;
-    $v1 != $v6;
-
-    $v2 != $v3;
-    $v2 != $v4;
-    $v2 != $v5;
-    $v2 != $v6;
-
-    $v3 != $v4;
-    $v3 != $v5;
-    $v3 != $v6;
-
-    $v4 != $v5;
-    $v4 != $v6;
-
-    $v5 != $v6;
+    (mem: $v1, mem: $v2, mem: $v3, mem: $v4, mem: $v5, mem: $v6) isa permutation-generator;
 } then {
     (pos1: $v1, pos2: $v2, pos3: $v3, pos4: $v4, pos5: $v5, pos6: $v6) isa column;
+};
+
+rule box-rule:
+when {
+    (mem: $v1, mem: $v2, mem: $v3, mem: $v4, mem: $v5, mem: $v6) isa permutation-generator;
+} then {
+    (pos1: $v1, pos2: $v2, pos3: $v3, pos4: $v4, pos5: $v5, pos6: $v6) isa box;
 };
 
 
@@ -125,6 +91,13 @@ when {
     (pos1: $d1, pos2: $d2, pos3: $d3, pos4: $d4, pos5: $d5, pos6: $d6) isa column;
     (pos1: $e1, pos2: $e2, pos3: $e3, pos4: $e4, pos5: $e5, pos6: $e6) isa column;
     (pos1: $f1, pos2: $f2, pos3: $f3, pos4: $f4, pos5: $f5, pos6: $f6) isa column;
+
+    (pos1: $a1, pos2: $b1, pos3: $c1, pos4: $a2, pos5: $b2, pos6: $c2) isa box;
+    (pos1: $a3, pos2: $b3, pos3: $c3, pos4: $a4, pos5: $b4, pos6: $c4) isa box;
+    (pos1: $a5, pos2: $b5, pos3: $c5, pos4: $a6, pos5: $b6, pos6: $c6) isa box;
+    (pos1: $d1, pos2: $e1, pos3: $f1, pos4: $d2, pos5: $e2, pos6: $f2) isa box;
+    (pos1: $d3, pos2: $e3, pos3: $f3, pos4: $d4, pos5: $e4, pos6: $f4) isa box;
+    (pos1: $d5, pos2: $e5, pos3: $f5, pos4: $d6, pos5: $e6, pos6: $f6) isa box;
 } then {
     (
     pos11: $a1, pos12: $b1, pos13: $c1, pos14: $d1, pos15: $e1, pos16: $f1,

@@ -27,3 +27,4 @@ $v3 = 3 isa number;
 $v4 = 4 isa number;
 $v5 = 5 isa number;
 $v6 = 6 isa number;
+(mem: $v1, mem: $v2, mem: $v3, mem: $v4, mem: $v5, mem: $v6) isa permutation-generator;
