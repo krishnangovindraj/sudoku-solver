@@ -35,10 +35,11 @@ java_deps()
 load("@rules_jvm_external//:defs.bzl", "maven_install")
 maven_install(
     artifacts = [
-        "com.vaticle.typedb:typedb-client:2.14.0",
-        "com.vaticle.typeql:typeql-lang:2.14.0",
-        "com.vaticle.typeql:typeql-query:2.14.0",
-        "com.vaticle.typeql:typeql-pattern:2.14.0",],
+        "com.vaticle.typedb:typedb-client:2.18.1",
+        "com.vaticle.typeql:typeql-lang:2.18.0",
+        "com.vaticle.typeql:typeql-query:2.18.0",
+        "com.vaticle.typeql:typeql-pattern:2.18.0"
+    ],
     repositories = [
         "https://repo.vaticle.com/repository/maven/",
         "https://repo.vaticle.com/repository/osi-maven/",

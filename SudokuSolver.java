@@ -24,7 +24,7 @@ import com.vaticle.typedb.client.api.concept.thing.Thing;
 import com.vaticle.typeql.lang.TypeQL;
 import com.vaticle.typeql.lang.pattern.Pattern;
 import com.vaticle.typeql.lang.pattern.variable.ThingVariable;
-import com.vaticle.typeql.lang.pattern.variable.UnboundVariable;
+import com.vaticle.typeql.lang.pattern.variable.UnboundConceptVariable;
 
 
 import java.util.ArrayList;
@@ -65,14 +65,14 @@ class SudokuSolver {
 
         ThingVariable.Relation solutionRelation = null;
         int size = initial.length;
-        UnboundVariable connectorHack = TypeQL.var("connector-hack");
+        UnboundConceptVariable connectorHack = TypeQL.cVar("connector-hack");
         statements.add(connectorHack.isa("connector-hack"));
         for(int i = 0; i < size; i++){
             for(int j = 0; j < size; j++){
                 String role = "pos" + (i+1) + (j+1);
                 int val = initial[i][j];
-                UnboundVariable rp = TypeQL.var(role);
-                if (solutionRelation == null) solutionRelation = TypeQL.var("r").rel(role, rp);
+                UnboundConceptVariable rp = TypeQL.cVar(role);
+                if (solutionRelation == null) solutionRelation = TypeQL.cVar("r").rel(role, rp);
                 else solutionRelation = solutionRelation.rel(role, rp);
                 if (val != 0 ) {
                     statements.add(rp.eq(val));
